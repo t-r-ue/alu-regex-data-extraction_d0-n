@@ -1,0 +1,118 @@
+{
+    "summary": {
+        "total_lines": 16,
+        "emails_found": 5,
+        "cards_found": 3,
+        "urls_found": 4,
+        "phones_found": 3,
+        "threats_found": 4
+    },
+    "extracted_data": {
+        "emails": [
+            {
+                "raw": "admin.lecturer@alueducation.com",
+                "masked": "a************r@alueducation.com",
+                "classification": "ALU Staff",
+                "line": 1
+            },
+            {
+                "raw": "grad.fellow@alumni.alueducation.com",
+                "masked": "g*********w@alumni.alueducation.com",
+                "classification": "ALU Alumni",
+                "line": 2
+            },
+            {
+                "raw": "external.vendor@gmail.com",
+                "masked": "e*************r@gmail.com",
+                "classification": "General email",
+                "line": 3
+            },
+            {
+                "raw": "active.student@alustudent.com",
+                "masked": "a************t@alustudent.com",
+                "classification": "ALU Student",
+                "line": 4
+            },
+            {
+                "raw": "test.user@alueducation.com",
+                "masked": "t*******r@alueducation.com",
+                "classification": "ALU Staff",
+                "line": 10
+            }
+        ],
+        "credit_cards": [
+            {
+                "raw": "4111-1111-1111-1111",
+                "masked": "XXXX-XXXX-XXXX-1111",
+                "luhn_valid": true,
+                "line": 5
+            },
+            {
+                "raw": "5555 5555 5555 4444",
+                "masked": "XXXX XXXX XXXX 4444",
+                "luhn_valid": true,
+                "line": 6
+            },
+            {
+                "raw": "4111-1111-1111-1112",
+                "masked": "XXXX-XXXX-XXXX-1112",
+                "luhn_valid": false,
+                "line": 13
+            }
+        ],
+        "urls": [
+            {
+                "url": "https://api.alueducation.com/v1/courses/materials?year=2026",
+                "line": 7
+            },
+            {
+                "url": "http://www.alueducation.com/search?q=",
+                "line": 11
+            },
+            {
+                "url": "https://api.alueducation.com/v1/download?file=../../../../etc/passwd.",
+                "line": 12
+            },
+            {
+                "url": "http://www.wikipedia.org/wiki/African_Leadership_University",
+                "line": 14
+            }
+        ],
+        "phone_numbers": [
+            {
+                "num": "+250 788 123 456",
+                "line": 8
+            },
+            {
+                "num": "(123) 456-7890",
+                "line": 9
+            },
+            {
+                "num": "+1-555-876-5432",
+                "line": 15
+            }
+        ]
+    },
+    "threats": [
+        {
+            "line": 10,
+            "threat": "SQL Injection threat detected",
+            "details": "2026-05-19T10:12:00Z [CRITICAL] waf-firewall: SQL Injection signature matched on login form email field. Raw Input Payload: test.user@alueducation.com' OR 1=1 --. Request blocked."
+        },
+        {
+            "line": 11,
+            "threat": "Cross Site Scripting threat detected",
+            "details": "2026-05-19T10:13:45Z [CRITICAL] waf-firewall: Cross-Site Scripting (XSS) detected in HTTP GET query string. Raw URI: http://www.alueducation.com/search?q=<script>alert('XSS_POC')</script>&category=docs. Request terminated."
+        },
+        {
+            "line": 12,
+            "threat": "Path Traversal threat detected",
+            "details": "2026-05-19T10:15:10Z [CRITICAL] intrusion-detection: File retrieval attempt utilizing Directory Traversal detected. Target URI: https://api.alueducation.com/v1/download?file=../../../../etc/passwd. Source IP: 45.123.88.9."
+        },
+        {
+            "line": 16,
+            "threat": "Cross Site Scripting threat detected",
+            "details": "2026-05-19T10:25:01Z [CRITICAL] waf-firewall: Hostile script inclusion detected in POST message body. Payload: <iframe src=\"javascript:alert('malicious_frame')\"></iframe>. Source IP: 198.51.100.12."
+        }
+    ]
+}
